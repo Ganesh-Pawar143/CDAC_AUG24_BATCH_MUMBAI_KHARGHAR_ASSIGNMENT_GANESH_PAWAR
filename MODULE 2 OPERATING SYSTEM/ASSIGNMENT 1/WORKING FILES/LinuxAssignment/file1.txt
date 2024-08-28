@@ -1,0 +1,6 @@
+Hii, Practice of Assignment 1 of operating system.
+pwd - check directory
+nano - open files, if its not present then it create the file and open
+ls - list all the files and subdirectory in the current working directory 
+touch - create new file
+mkdir - to create new durectory
