@@ -1,0 +1,7 @@
+#!/bin/bash/
+
+read n
+read -a arr
+
+# echo ${arr[@]} | uniq -u
+echo "${arr[@]}" | tr ' ' '\n' | sort | uniq -u | tr '\n' ' '

@@ -1,0 +1,7 @@
+read n
+	if [ $n -ge 10 ]
+then
+	echo "Number is Greater Than 10"
+else 
+	echo "Number is less than 10"
+fi

@@ -1,0 +1,15 @@
+#!/bin/bash
+while true; 
+do
+    
+    read -p number
+
+    if [ $number -lt 0 ] 
+    then
+        break
+    fi
+
+    square=$((number * number))
+
+    echo " $number = $square"
+done

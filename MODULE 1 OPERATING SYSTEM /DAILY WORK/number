@@ -1,0 +1,2 @@
+read number
+echo "Entered Number is : $number"

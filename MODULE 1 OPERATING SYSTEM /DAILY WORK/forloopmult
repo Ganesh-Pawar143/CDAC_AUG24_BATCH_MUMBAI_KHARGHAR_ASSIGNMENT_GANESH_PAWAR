@@ -1,0 +1,7 @@
+read n
+
+for i in [ 0..10]
+do 
+	m=$n*$i
+	echo $m
+done

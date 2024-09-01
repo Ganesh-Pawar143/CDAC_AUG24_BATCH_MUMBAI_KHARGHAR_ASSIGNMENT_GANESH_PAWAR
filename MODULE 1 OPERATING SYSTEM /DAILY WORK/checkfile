@@ -1,0 +1,6 @@
+if [ -e file.txt ]
+then
+	echo "File.txt Exist"
+else 
+	echo "File.txt Not Exist"
+fi

@@ -1,0 +1,12 @@
+#!/bin/bash/
+
+while true
+do
+	read number
+	if [ $number -lt 0 ]
+	then
+		break
+	fi
+	square=`expr $number\*$number`
+	echo 'Square of $number is $square'
+done
