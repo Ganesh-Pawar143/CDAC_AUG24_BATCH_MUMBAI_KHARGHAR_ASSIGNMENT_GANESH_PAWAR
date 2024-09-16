@@ -1,49 +1,29 @@
-package org.example;
+package org.example.association.test;
 
-import java.util.Scanner;
-
-class Employee {
-	private String Name;
-	private int Empid;
-	private float Salary;
-
-	public void acceptRecord() {
-		Scanner sc = new Scanner(System.in);
-		System.out.print("Enter Name	:");
-		Name = sc.nextLine();
-			
-		System.out.print("Enter Empid	:");
-		Empid=sc.nextInt();
-		
-		System.out.print("Enter Salary	:");
-		Salary=sc.nextFloat();
-		
-
-	}
-
-	public void  printRecord (){
-		
-		System.out.println("Name	:" + Name);
-		
-		System.out.println("Empid	:" + Empid);
-		
-		System.out.println("Salary	:" + Salary);
-		
-
-	}
-
-}
+import org.example.association.lib.Address;
+import org.example.association.lib.Date;
+import org.example.association.lib.Person;
 
 public class Program {
-
 	public static void main(String[] args) {
-
-		Employee emp1 = new Employee();
+		Person person=new Person();
+		person.setName("Sandeep");
 		
-		emp1.acceptRecord();
-
-		emp1.printRecord();
-
+		Date birthDate = person.getBirthDate();
+		birthDate.setDay(23);
+		birthDate.setMonth(7);
+		birthDate.setYear(1983);
+		
+		Address currentAddress = new Address();
+		currentAddress.setCityName("Pune");
+		currentAddress.setStateName("Maharashtra");
+		currentAddress.setPinCode(12345);
+		
+		person.setCurrentAddress(currentAddress);
+		
+		System.out.println( person.toString() );
 	}
-
+	
 }
+
+
