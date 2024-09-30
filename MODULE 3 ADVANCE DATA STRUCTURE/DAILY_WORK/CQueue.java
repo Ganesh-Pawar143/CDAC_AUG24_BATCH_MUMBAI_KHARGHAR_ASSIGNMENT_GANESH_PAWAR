@@ -1,12 +1,12 @@
 //Infinite loop
-class Queue{
+class CQueue{
 	
 	
 	int size = 5;
-	int Q[] = new int[size];
+	int CQ[] = new int[size];
 	int front, rear;
 	
-	Queue()
+	CQueue()
 	{
 		front = -1;
 		rear = -1;
@@ -19,7 +19,7 @@ class Queue{
 	
 	boolean isFull ()
 	{
-		return (rear == size-1);
+		return ((rear + 1) % size == front);
 	}
 	
 	void enqueue(int x)
@@ -34,8 +34,8 @@ class Queue{
 			{
 				front = 0;// set front to 0 if queue is empty
 			}
-			rear++;
-			Q[rear] = x;
+			rear = (rear + 1) % size;//r++
+			CQ[rear] = x;
 			System.out.println(x + " Inserted");
 		}
 	}
@@ -49,15 +49,15 @@ class Queue{
 			return -1;
 		}
 		else{
-			int x = Q[front];
+			int x = CQ[front];
 			System.out.println(x+ " Deleted");
-			if (front > rear)
+			if (front == rear)
 			{
 				front = -1;
 				rear = -1;
 			}
 			else{
-				front++;
+				front = (front+1) % size; //f++
 			}
 			return x;
 		}
@@ -71,36 +71,31 @@ class Queue{
 		}
 		else{
 			System.out.print("Queue elements: ");
-			for(int i = front;i <= rear; i++)
+			int i = front;
+			while(i != rear)
 			{
-				System.out.print(Q[i]+" ");
+				System.out.print(CQ[i]+ " " );
+				i = (i+1) % size;
 			}
+			
+			System.out.println(CQ[rear]);
 			System.out.println();
 		}
 		
 	}
 	public static void main(String args[])
 	{
-		Queue q1 = new Queue();
+		CQueue q1 = new CQueue();
 		q1.enqueue(11);
 		q1.enqueue(12);
 		q1.enqueue(13);
 		q1.enqueue(14);
+		q1.enqueue(11);
 		q1.display();
 		
 		q1.dequeue();
 		q1.display();
 		
-		q1.dequeue();
-		q1.display();
 		
-		q1.dequeue();
-		q1.display();
-		
-		q1.dequeue();
-		q1.display();
-		
-		q1.dequeue();
-		q1.display();
 	}
 }
