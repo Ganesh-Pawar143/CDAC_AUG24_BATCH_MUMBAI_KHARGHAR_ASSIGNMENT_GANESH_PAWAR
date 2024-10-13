@@ -1,108 +1,69 @@
+package ParishakDemo;
+
+import java.util.Scanner;
 
 public class CircularQueue{
-	int size=5;
-	int CQ[]=new int[size];
-	int front,rear;
-	
-	CircularQueue(){
-		
-		front=-1;
-		rear=-1;
-	}
-	
-	boolean isEmpty(){
-		return (front==-1);
-	}
-	
-	boolean isFull(){
-		return((rear+1)%size == front );
-	}
-	
-	void enqueue(int x){
-		if (isFull()){
-			System.out.println("Queue is Full");
-		}else{
-			if (front==-1){
-			front++;  // set front to 0 if queue is empty
-			}
-			rear= (rear+1) %size;
-			CQ[rear]=x;
-			System.out.println(x+" Inserted");
-		}
-	}
-	void dequeue(){
-		if (isEmpty()){
-			System.out.println("Queue is Empty");
-		}else{
-			int x = CQ[front];
-			System.out.println(x + " Deleted");
-			
-			if(front == rear){
-				System.out.println("Queue is Empty Now");
-				front=-1;
-				rear=-1;
-			}else{
-				front= (front+1)%size; //front ++
-			}			
-						
-		}
-		
-	}
-	
-	void display(){
-		if (isEmpty()){
-			System.out.println("Empty queue");
-			
-		}else{
-			System.out.print("Queue Element :	");
-			
-			int i=front;
-			while (true ){
-				System.out.print(CQ[i]+"	");
-				if (i==rear)break;
-				i=(i+1)%size;
-			}
-			
-			//while (i != rear ){
-			//	System.out.print(CQ[i]+"	");
-				
-			//	i=(i+1)%size;
-			//}
-			
-			System.out.println();
-		}
-	}
-	
-	
-	public static void main(String [] args){
-		CircularQueue cq1= new CircularQueue();
-		
-		
-		cq1.enqueue(10);
-		cq1.enqueue(20);
-		cq1.enqueue(30);
-		cq1.enqueue(40);
-		cq1.enqueue(50);
-		
-		cq1.enqueue(60);
-		
-		cq1.display();
-		
-		
-		cq1.dequeue();
-		cq1.display();
-		cq1.dequeue();
-		cq1.display();
-		cq1.dequeue();
-		cq1.display();
-		cq1.dequeue();
-		cq1.display();
-		cq1.dequeue();
-		cq1.display();
-		cq1.dequeue();
-		
-		
-		
-		
-	} 
+
+    int []queue;
+    int cap;
+    int rear;
+    int front;
+    int size;
+
+    CircularQueue(int n) {
+        cap = n;
+        front = -1;
+        rear = -1;
+        size = 0;
+        queue = new int[cap];
+    }
+
+    void enque(int value) {
+
+        if (size == cap) {
+            System.out.println("FULL");
+            return;
+        }
+        if (front == -1) {
+            front = 0;
+        }
+        rear = (rear + 1) % cap;
+        queue[rear] = value;
+        size++;
+    }
+
+    void deque() {
+        if (size == 0) {
+            System.out.println("EMPTY");
+            return;
+        }
+        System.out.println(queue[front]);
+        front = (front + 1) % cap;
+        size--;
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        CircularQueue cq = new CircularQueue(n);
+
+        while (true) {
+            String cmd = sc.next();
+            if (cmd.equals("exit")) {
+                break;
+            }
+
+            switch (cmd) {
+                case "enque":
+                    int value = sc.nextInt();
+                    cq.enque(value);
+                    break;
+
+                case "deque":
+                    cq.deque();
+                    break;
+            }
+        }
+        sc.close();
+    }
 }

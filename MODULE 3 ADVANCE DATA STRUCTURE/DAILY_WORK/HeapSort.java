@@ -1,4 +1,6 @@
-class HeapSort{
+package org.ads.sort;
+
+public class HeapSort{
 	
 	void heapify(int arr[],int n,int i){
 		int largest=i; //root
@@ -18,6 +20,8 @@ class HeapSort{
 			int temp=arr[i];
 			arr[i]=arr[largest];
 			arr[largest]=temp;
+			
+		
 			heapify(arr,n,largest);
 		}
 		
@@ -41,7 +45,10 @@ class HeapSort{
 			int temp = arr[0];
 			arr[0]=arr[i];
 			arr[i]=temp;
+			display(arr);
 			heapify(arr,i,0);
+			
+			
 		}
 		
 		
