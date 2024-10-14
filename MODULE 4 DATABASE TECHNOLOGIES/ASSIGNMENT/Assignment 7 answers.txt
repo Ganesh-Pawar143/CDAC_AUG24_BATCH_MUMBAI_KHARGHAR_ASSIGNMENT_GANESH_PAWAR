@@ -1,0 +1,80 @@
+Assignment –7
+Summarizing Data with Aggregate Functions.
+
+
+1) Write a query that counts all orders for October 3.
+
+mysql> select count(*) from orders where Odate > 1990-10-03;
++----------+
+| count(*) |
++----------+
+|       10 |
++----------+
+1 row in set, 1 warning (0.01 sec)
+
+
+2) Write a query that counts the number of different non-NULL city values in the Customers table.
+
+mysql> select count(city) from Customers ;
++-------------+
+| count(city) |
++-------------+
+|           7 |
++-------------+
+1 row in set (0.00 sec)
+
+3) Write a query that selects each customer’s smallest order.
+mysql> select Cnum , min(Amt) from orders group by Cnum ;
++------+----------+
+| Cnum | min(Amt) |
++------+----------+
+| 2008 |    18.69 |
+| 2001 |   767.19 |
+| 2007 |  1900.10 |
+| 2003 |  5160.45 |
+| 2002 |  1713.23 |
+| 2004 |    75.75 |
+| 2006 |  4723.00 |
++------+----------+
+7 rows in set (0.01 sec)
+
+
+
+4) Write a query that selects the first customer, in alphabetical order, whose name begins with G.
+
+mysql> select Cname from Customers where Cname like 'G%' order by Cname Limit 1;
++----------+
+| Cname    |
++----------+
+| Giovanni |
++----------+
+1 row in set (0.00 sec)
+
+
+5) Write a query that selects the highest rating in each city.
+mysql> select city , max(Rating) from customers group by city ;
++----------+-------------+
+| city     | max(Rating) |
++----------+-------------+
+| London   |         100 |
+| Rome     |         200 |
+| San Jose |         300 |
+| Berlin   |         300 |
++----------+-------------+
+4 rows in set (0.00 sec)
+
+
+
+6) Write a query that counts the number of salespeople registering orders for each day. (If a salesperson has more than one order on a given day, he or she should be counted only once.)
+
+mysql> select Snum, count( distinct Odate) from orders group by Snum;
++------+------------------------+
+| Snum | count( distinct Odate) |
++------+------------------------+
+| 1001 |                      3 |
+| 1002 |                      3 |
+| 1003 |                      1 |
+| 1004 |                      1 |
+| 1007 |                      1 |
++------+------------------------+
+5 rows in set (0.01 sec)
