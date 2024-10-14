@@ -1,0 +1,214 @@
+SQL Exercise 4 
+
+
+
+1. Display the minimum Status in the Supplier table. 
+
+mysql> select Min(Status) from s;
++-------------+
+| Min(Status) |
++-------------+
+|          10 |
++-------------+
+1 row in set (0.00 sec)
+
+
+ 
+2. Display the maximum Weight in the Parts table. 
+
+mysql> select max(weight) from p;
++-------------+
+| max(weight) |
++-------------+
+|       19.00 |
++-------------+
+1 row in set (0.00 sec)
+
+
+ 
+3. Display the average Weight of the Parts. 
+
+mysql> select avg(weight) from p;
++-------------+
+| avg(weight) |
++-------------+
+|   14.992105 |
++-------------+
+1 row in set (0.00 sec)
+ 
+4. Display the total Quantity sold for part ‘P1’. 
+
+mysql> select Sum(Qty) from spj where `P#`='p1';
++----------+
+| Sum(Qty) |
++----------+
+|      100 |
++----------+
+1 row in set (0.00 sec)
+ 
+5. Display the total Quantity sold for each part. 
+
+mysql> select `P#`,Sum(Qty) from spj group by `P#`;
++------+----------+
+| P#   | Sum(Qty) |
++------+----------+
+| P1   |      100 |
+| P2   |      200 |
+| P3   |      150 |
+| P4   |      300 |
+| P5   |      120 |
+| P6   |      130 |
+| P7   |      140 |
+| P8   |      150 |
+| P9   |      160 |
+| P10  |      170 |
+| P11  |      180 |
+| P12  |      190 |
+| P13  |      200 |
+| P14  |      210 |
+| P15  |      110 |
+| P16  |      120 |
+| P17  |      130 |
+| P18  |      140 |
+| P19  |      150 |
++------+----------+
+19 rows in set (0.00 sec)
+
+ 
+6. Display the average Quantity sold for each part. 
+ mysql> select `P#`,avg(Qty) from spj group by `P#`;
++------+----------+
+| P#   | avg(Qty) |
++------+----------+
+| P1   | 100.0000 |
+| P2   | 200.0000 |
+| P3   | 150.0000 |
+| P4   | 300.0000 |
+| P5   | 120.0000 |
+| P6   | 130.0000 |
+| P7   | 140.0000 |
+| P8   | 150.0000 |
+| P9   | 160.0000 |
+| P10  | 170.0000 |
+| P11  | 180.0000 |
+| P12  | 190.0000 |
+| P13  | 200.0000 |
+| P14  | 210.0000 |
+| P15  | 110.0000 |
+| P16  | 120.0000 |
+| P17  | 130.0000 |
+| P18  | 140.0000 |
+| P19  | 150.0000 |
++------+----------+
+19 rows in set (0.03 sec)
+ 
+ 
+ 
+ 
+7. Display the maximum Quantity sold for each part, provided the maximum Quantity is greater than 800. 
+
+mysql> select `P#`,max(Qty) maxq from spj  group by `P#` having maxq>800;
+Empty set (0.03 sec)
+
+ 
+8. Display the Status and the count of Suppliers with that Status. 
+
+mysql> select status, count(`s#`) from s group by status;
++--------+-------------+
+| status | count(`s#`) |
++--------+-------------+
+|     10 |           4 |
+|     20 |           4 |
+|     30 |           3 |
+|     40 |           3 |
+|     50 |           1 |
+|     15 |           1 |
+|     12 |           1 |
+|     18 |           1 |
+|     14 |           1 |
++--------+-------------+
+9 rows in set (0.00 sec)
+
+ 
+9. Display the count of Projects going on in different cities. 
+mysql> select city , count(`J#`) from J group by city;
++-----------+-------------+
+| city      | count(`J#`) |
++-----------+-------------+
+| London    |           2 |
+| Athens    |           2 |
+| Paris     |           2 |
+| Berlin    |           1 |
+| Tokyo     |           1 |
+| Delhi     |           1 |
+| Rome      |           1 |
+| Mumbai    |           1 |
+| Sydney    |           1 |
+| Toronto   |           1 |
+| Dubai     |           1 |
+| Lisbon    |           1 |
+| Lyon      |           1 |
+| Liverpool |           1 |
+| Leeds     |           1 |
++-----------+-------------+
+15 rows in set (0.00 sec)
+
+
+
+
+ 
+10. What is the difference between COUNT(Status) and COUNT(*) ? 
+
+mysql> select count(status), count(*) from s;
++---------------+----------+
+| count(status) | count(*) |
++---------------+----------+
+|            19 |       19 |
++---------------+----------+
+1 row in set (0.00 sec)
+
+
+but here the count status returns the nonnull status fileds and count(*) return thhe all count which inchlude null fied also
+ 
+ 
+11. Display the Status and the Count of Suppliers with that Status in the following format 
+as shown below:- 
+ 
+Status Count 
+Ten 1 
+Twenty 2 
+Thirty 3
+
+mysql> SELECT
+    ->     CASE
+    ->         WHEN Status = '10' THEN 'Ten'
+    ->         WHEN Status = '20' THEN 'Twenty'
+    ->         WHEN Status = '30' THEN 'Thirty'
+    ->         WHEN Status = '40' THEN 'Forty'
+    ->         WHEN Status = '50' THEN 'Fifty'
+    ->          WHEN Status = '10' THEN 'Ten'
+    ->         WHEN Status = '15' THEN 'Fifteen'
+    ->         WHEN Status = '12' THEN 'Tweleve'
+    ->         WHEN Status = '18' THEN 'Eighteen'
+    ->         WHEN Status = '14' THEN 'Fourteen'
+    ->         ELSE 'Unknown'
+    ->     END AS Status,
+    ->     COUNT(*) AS Count
+    -> FROM
+    ->     s
+    -> GROUP BY
+    ->     Status;
++----------+-------+
+| Status   | Count |
++----------+-------+
+| Ten      |     4 |
+| Twenty   |     4 |
+| Thirty   |     3 |
+| Forty    |     3 |
+| Fifty    |     1 |
+| Fifteen  |     1 |
+| Tweleve  |     1 |
+| Eighteen |     1 |
+| Fourteen |     1 |
++----------+-------+
+9 rows in set, 1 warning (0.00 sec)

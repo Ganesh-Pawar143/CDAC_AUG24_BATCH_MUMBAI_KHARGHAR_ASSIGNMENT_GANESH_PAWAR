@@ -1,0 +1,254 @@
+SQL Exercise 5
+
+ 
+1. Display the Supplier name and the Quantity sold. 
+
+mysql> select Sname, sum(Qty) from SPJ , S where spj.`S#` = s.`S#` group by Sname;
++------------+----------+
+| Sname      | sum(Qty) |
++------------+----------+
+| GANESH     |      100 |
+| ASHISH     |      200 |
+| SHREERAM   |      150 |
+| MUDIT      |      300 |
+| Supplier5  |      120 |
+| Supplier6  |      130 |
+| Supplier7  |      140 |
+| Supplier8  |      150 |
+| Supplier9  |      160 |
+| Supplier10 |      170 |
+| Supplier11 |      180 |
+| Supplier12 |      190 |
+| Supplier13 |      200 |
+| Supplier14 |      210 |
+| Supplier15 |      110 |
+| Supplier16 |      120 |
+| Supplier17 |      130 |
+| Supplier18 |      140 |
+| Supplier19 |      150 |
++------------+----------+
+19 rows in set (0.00 sec)
+
+
+
+
+ 
+2. Display the Part name and Quantity sold. 
+
+mysql> select Pname, sum(Qty) from SPJ , P where spj.`P#` = P.`P#` group by
+Pname;
++---------+----------+
+| Pname   | sum(Qty) |
++---------+----------+
+| Part1   |      100 |
+| Part2   |      200 |
+| Part3   |      150 |
+| Part4   |      300 |
+| Part5   |      120 |
+| Part6   |      130 |
+| Part7   |      140 |
+| Part8   |      150 |
+| Part9   |      160 |
+| Part10  |      170 |
+| Part11  |      180 |
+| Part12  |      190 |
+| Part13  |      200 |
+| Part14  |      210 |
+| Spindle |      110 |
+| Spool   |      120 |
+| Stator  |      130 |
+| Shaft   |      140 |
+| Screw   |      150 |
++---------+----------+
+19 rows in set (0.00 sec)
+
+ 
+3. Display the Project name and Quantity sold. 
+
+mysql> select Jname, sum(Qty) from SPJ , J where spj.`J#` = J.`J#` group by
+Jname;
++-----------+----------+
+| Jname     | sum(Qty) |
++-----------+----------+
+| Project1  |      400 |
+| Project2  |      200 |
+| Project3  |      150 |
+| Project4  |      120 |
+| Project5  |      130 |
+| Project6  |      140 |
+| Project7  |      150 |
+| Project8  |      160 |
+| Project9  |      170 |
+| Project10 |      180 |
+| Project11 |      190 |
+| Project12 |      200 |
+| Project13 |      210 |
+| Zenith    |      110 |
+| Canopy    |      120 |
+| Runner    |      130 |
+| Window    |      140 |
+| Bunker    |      150 |
++-----------+----------+
+18 rows in set (0.00 sec)
+ 
+4. Display the Supplier name, Part name, Project name and Quantity sold. 
+
+mysql> select Sname,Pname, Jname, sum(Qty) from SPJ ,S,P, J where spj.`J#` = J.`J#` and SPJ.`P#`=P.`P#` AND SPJ.`S#`=S.`S#` group by Sname , Pname, Jname;
++------------+---------+-----------+----------+
+| Sname      | Pname   | Jname     | sum(Qty) |
++------------+---------+-----------+----------+
+| GANESH     | Part1   | Project1  |      100 |
+| ASHISH     | Part2   | Project2  |      200 |
+| SHREERAM   | Part3   | Project3  |      150 |
+| MUDIT      | Part4   | Project1  |      300 |
+| Supplier5  | Part5   | Project4  |      120 |
+| Supplier6  | Part6   | Project5  |      130 |
+| Supplier7  | Part7   | Project6  |      140 |
+| Supplier8  | Part8   | Project7  |      150 |
+| Supplier9  | Part9   | Project8  |      160 |
+| Supplier10 | Part10  | Project9  |      170 |
+| Supplier11 | Part11  | Project10 |      180 |
+| Supplier12 | Part12  | Project11 |      190 |
+| Supplier13 | Part13  | Project12 |      200 |
+| Supplier14 | Part14  | Project13 |      210 |
+| Supplier15 | Spindle | Zenith    |      110 |
+| Supplier16 | Spool   | Canopy    |      120 |
+| Supplier17 | Stator  | Runner    |      130 |
+| Supplier18 | Shaft   | Window    |      140 |
+| Supplier19 | Screw   | Bunker    |      150 |
++------------+---------+-----------+----------+
+19 rows in set (0.00 sec)
+ 
+5. Display the Supplier name, Supplying Parts to a Project in the same City. 
+
+mysql> select S.Sname, P.Pname,J.Jname , J.City from S , P, J ,SPJ where SPJ.`S#`=S.`S#` and SPJ.`P#`=P.`P#` AND SPJ.`J#`=J.`J#` and s.city=J.City;
++------------+---------+-----------+-----------+
+| Sname      | Pname   | Jname     | City      |
++------------+---------+-----------+-----------+
+| GANESH     | Part1   | Project1  | London    |
+| Supplier5  | Part5   | Project4  | Berlin    |
+| Supplier6  | Part6   | Project5  | Tokyo     |
+| Supplier7  | Part7   | Project6  | Delhi     |
+| Supplier8  | Part8   | Project7  | Rome      |
+| Supplier9  | Part9   | Project8  | Mumbai    |
+| Supplier10 | Part10  | Project9  | Sydney    |
+| Supplier11 | Part11  | Project10 | Toronto   |
+| Supplier12 | Part12  | Project11 | Dubai     |
+| Supplier13 | Part13  | Project12 | Paris     |
+| Supplier14 | Part14  | Project13 | Athens    |
+| Supplier15 | Spindle | Zenith    | London    |
+| Supplier16 | Spool   | Canopy    | Lisbon    |
+| Supplier17 | Stator  | Runner    | Lyon      |
+| Supplier18 | Shaft   | Window    | Liverpool |
+| Supplier19 | Screw   | Bunker    | Leeds     |
++------------+---------+-----------+-----------+
+16 rows in set (0.00 sec)
+
+
+
+ 
+6. Display the Part name that is ‘Red’ is color, and the Quantity sold. 
+
+mysql> select P.Pname , P.Color , SPJ.Qty from P, spj where SPJ.`P#` = P.`P#` AND COLOR = 'RED';
++--------+-------+------+
+| Pname  | Color | Qty  |
++--------+-------+------+
+| Part1  | Red   |  100 |
+| Stator | Red   |  130 |
++--------+-------+------+
+2 rows in set (0.00 sec)
+
+
+ 
+7. Display all the Quantity sold by Suppliers with the Status = 20. 
+ 
+mysql> SELECT S.`S#`, SPJ.QTY FROM S, SPJ WHERE S.`S#`=SPJ.`S#` AND S.STATUS
+=20;
++------+------+
+| S#   | QTY  |
++------+------+
+| S2   |  200 |
+| S8   |  150 |
+| S11  |  180 |
+| S17  |  130 |
++------+------+
+4 rows in set (0.00 sec)
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+8. Display all the Parts and Quantity with a Weight > 14.
+
+mysql> SELECT P.* , SPJ.QTY FROM SPJ , P WHERE P.`P#`=SPJ.`P#` AND P.WEIGHT
+> 14;
++------+---------+--------+--------+-----------+------+
+| P#   | Pname   | Color  | Weight | City      | QTY  |
++------+---------+--------+--------+-----------+------+
+| P5   | Part5   | White  |  15.00 | Berlin    |  120 |
+| P6   | Part6   | Black  |  16.00 | Tokyo     |  130 |
+| P7   | Part7   | Orange |  17.50 | Delhi     |  140 |
+| P8   | Part8   | Pink   |  18.25 | Rome      |  150 |
+| P10  | Part10  | Brown  |  19.00 | Sydney    |  170 |
+| P12  | Part12  | Gold   |  14.55 | Dubai     |  190 |
+| P13  | Part13  | Cyan   |  15.20 | Paris     |  200 |
+| P15  | Spindle | Grey   |  16.00 | London    |  110 |
+| P16  | Spool   | Blue   |  18.00 | Lisbon    |  120 |
+| P17  | Stator  | Red    |  14.50 | Lyon      |  130 |
+| P18  | Shaft   | Green  |  19.00 | Liverpool |  140 |
++------+---------+--------+--------+-----------+------+
+11 rows in set (0.00 sec)
+
+ 
+ 
+9. Display all the Project names and City, which has bought more than 500 Parts. 
+
+mysql> SELECT J.JNAME , J.CITY FROM J , SPJ WHERE J.`J#`=SPJ.`J#` AND QTY > 500;
++-----------+--------+
+| JNAME     | CITY   |
++-----------+--------+
+| Project20 | City20 |
+| Project21 | City21 |
+| Project22 | City22 |
++-----------+--------+
+3 rows in set (0.00 sec)
+
+
+ 
+10. Display all the Part names and Quantity sold that have a Weight less than 15. 
+mysql> SELECT P.PNAME , SPJ.QTY FROM P,SPJ WHERE SPJ.`P#`=P.`P#` AND P.WEIGH
+T<15;
++--------+------+
+| PNAME  | QTY  |
++--------+------+
+| Part1  |  100 |
+| Part2  |  200 |
+| Part3  |  150 |
+| Part4  |  300 |
+| Part9  |  160 |
+| Part11 |  180 |
+| Part12 |  190 |
+| Part14 |  210 |
+| Stator |  130 |
+| Screw  |  150 |
++--------+------+
+10 rows in set (0.00 sec)
+
+
+
+
+ 
+11. Display all the Employee names and the name of their Managers. 
+
+
+
+
+
+
+
+
+
+
