@@ -1,0 +1,151 @@
+SQL Exercise 6 
+
+
+1. Display all the Suppliers with the same Status as the supplier, ‘CLARK’. 
+
+
+
+ 
+2. Display all the Employees in the same department as the employee MILLER’. 
+
+mysql> select Ename from emp where deptno=(select deptno from emp where ename='MILLER');
++--------+
+| Ename  |
++--------+
+| CLARK  |
+| KING   |
+| MILLER |
++--------+
+3 rows in set (0.00 sec)
+ 
+3. Display all the Parts which have more Weight than all the Red parts. 
+
+mysql> select pname,weight from p where weight>any (select weight from p whe
+re color='red');
++---------+--------+
+| pname   | weight |
++---------+--------+
+| Part2   |  14.00 |
+| Part3   |  13.50 |
+| Part5   |  15.00 |
+| Part6   |  16.00 |
+| Part7   |  17.50 |
+| Part8   |  18.25 |
+| Part9   |  12.75 |
+| Part10  |  19.00 |
+| Part11  |  13.80 |
+| Part12  |  14.55 |
+| Part13  |  15.20 |
+| Spindle |  16.00 |
+| Spool   |  18.00 |
+| Stator  |  14.50 |
+| Shaft   |  19.00 |
+| Screw   |  13.00 |
++---------+--------+
+16 rows in set (0.00 sec)
+
+ 
+4. Display all the Projects going on in the same city as the project ‘TAPE’. 
+mysql> select jname , city from j where city=(select city from j where jname='TAPE');
++----------+--------+
+| jname    | city   |
++----------+--------+
+| Project1 | London |
+| Zenith   | London |
+| TAPE     | London |
++----------+--------+
+
+ 
+5. Display all the Parts with Weight less than all the Green parts. 
+
+mysql> select pname , weight from p where weight<any(select weight from p wh
+ere color='Green');
++---------+--------+
+| pname   | weight |
++---------+--------+
+| Part1   |  12.50 |
+| Part2   |  14.00 |
+| Part3   |  13.50 |
+| Part4   |  11.00 |
+| Part5   |  15.00 |
+| Part6   |  16.00 |
+| Part7   |  17.50 |
+| Part8   |  18.25 |
+| Part9   |  12.75 |
+| Part11  |  13.80 |
+| Part12  |  14.55 |
+| Part13  |  15.20 |
+| Part14  |  11.30 |
+| Spindle |  16.00 |
+| Spool   |  18.00 |
+| Stator  |  14.50 |
+| Screw   |  13.00 |
++---------+--------+
+17 rows in set (0.00 sec)
+
+
+
+mysql> select pname , weight from p where weight<all(select weight from p wh
+ere color='Green');
++--------+--------+
+| pname  | weight |
++--------+--------+
+| Part1  |  12.50 |
+| Part4  |  11.00 |
+| Part9  |  12.75 |
+| Part14 |  11.30 |
+| Screw  |  13.00 |
++--------+--------+
+5 rows in set (0.00 sec)
+
+ 
+6. Display the name of the Supplier who has sold the maximum Quantity (in one sale). 
+
+
+mysql> select s.sname,max(spj.qty) maxqty from s join spj on spj.`s#`=s.`s#` group by s.sname order by maxqty desc limit 1;
++-------+--------+
+| sname | maxqty |
++-------+--------+
+| MUDIT |    300 |
++-------+--------+
+1 row in set (0.03 sec)
+
+
+
+ 
+7. Display the name of the Employee with the minimum Salary. 
+
+
+mysql> select ename from emp where sal = (select min(sal) from emp);
++-------+
+| ename |
++-------+
+| SMITH |
++-------+
+1 row in set (0.00 sec)
+
+
+ 
+8. Display the name of the Supplier who has sold the maximum overall Quantity (sum of Sales). 
+
+mysql> select S.Sname, sum(spj.qty) sumqty from s join spj on s.`s#`=spj.`s#` group by S.sname order by sumqty desc limit 1;
++-------+--------+
+| Sname | sumqty |
++-------+--------+
+| MUDIT |    300 |
++-------+--------+
+1 row in set (0.00 sec)
+
+
+
+ 
+9. Display the name of the Department with the maximum number of Employees.
+
+
+mysql> select dept.dname,count(emp.deptno) maxcount from emp join dept on emp.deptno=dept.deptno group by dept.dname order by maxcount desc limit 1 ;
++-------+----------+
+| dname | maxcount |
++-------+----------+
+| SALES |        6 |
++-------+----------+
+1 row in set (0.00 sec)
