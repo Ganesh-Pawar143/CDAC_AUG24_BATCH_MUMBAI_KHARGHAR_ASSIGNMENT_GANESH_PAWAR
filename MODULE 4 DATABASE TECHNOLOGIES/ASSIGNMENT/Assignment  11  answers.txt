@@ -1,0 +1,41 @@
+Assignment – 11
+Subqueries.
+
+
+1) Write a query that uses a subquery to obtain all orders for the customer named Cisneros. Assume you do not know his customer number (cnum).
+
+mysql> select * from orders where cnum=(select cnum from customers where cname='Cisneros');
++------+---------+------------+------+------+
+| Onum | Amt     | Odate      | Cnum | Snum |
++------+---------+------------+------+------+
+| 3001 |   18.69 | 1990-10-03 | 2008 | 1007 |
+| 3006 | 1098.16 | 1990-10-03 | 2008 | 1007 |
++------+---------+------------+------+------+
+2 rows in set (0.00 sec)
+
+2) Write a query that produces the names and ratings of all customers who have above-average orders.
+
+
+mysql> select c.Cname , c.rating from customers c join orders o on c.cnum=o.cnum where o.amt > (select avg(amt) from orders) group by c.cname , c.rating;
++---------+--------+
+| Cname   | rating |
++---------+--------+
+| Liu     |    200 |
+| Clemens |    100 |
++---------+--------+
+2 rows in set (0.01 sec)
+
+
+
+
+3) Write a query that selects the total amount in orders for each salesperson for whom this total is greater than the amount of the largest order in the table
+
+
+mysql> select s.snum , s.sname , sum(o.amt) ordervalue from salespeople s jo
+in orders o on s.snum=o.snum group by s.snum , s.sname having ordervalue > (select max(amt) from orders) ;
++------+-------+------------+
+| snum | sname | ordervalue |
++------+-------+------------+
+| 1001 | Peel  |   15382.07 |
++------+-------+------------+
+1 row in set (0.00 sec)

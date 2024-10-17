@@ -1,0 +1,33 @@
+Assignment – 10
+Joining a Table to Itself.
+
+
+
+1) Write a query that produces all pairs of salespeople who are living in the same city. Exclude combinations of salespeople with themselves as well as duplicate rows with the order reversed.
+
+mysql> select a.Sname , b.Sname , a.city from salespeople a join salespeople
+ b on a.city=b.city and a.snum<b.snum order by a.city , a.sname,b.sname;
++---------+--------+----------+
+| Sname   | Sname  | city     |
++---------+--------+----------+
+| Motika  | Smith  | London   |
+| Peel    | Motika | London   |
+| Peel    | Smith  | London   |
+| Axelrod | Jones  | New York |
+| Serres  | Davis  | San Jose |
++---------+--------+----------+
+5 rows in set (0.01 sec)
+
+
+
+2) Write a query that produces the names and cities of all customers with the same rating as Hoffman.
+
+mysql> select Cname , City from Customers where rating=(select rating from customers where Cname="Hoffman");
++---------+--------+
+| Cname   | City   |
++---------+--------+
+| Hoffman | London |
+| Clemens | London |
+| Pereira | Rome   |
++---------+--------+
+3 rows in set (0.01 sec)
