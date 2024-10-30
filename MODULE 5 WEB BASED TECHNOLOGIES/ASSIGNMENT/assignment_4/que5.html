@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercise 5</title>
+</head>
+<body>
+    <script>
+        // Simulating fetchData function from Exercise 4
+        function fetchData(callback) {
+            setTimeout(() => {
+                const data = { id: 1, name: 'John Doe', age: 25 };
+                console.log('Data fetched:', data);
+                callback(data);
+            }, 1000);
+        }
+
+        // processData function that modifies the data
+        function processData(data, callback) {
+            setTimeout(() => {
+                data.processed = true;
+                data.timestamp = new Date();
+                console.log('Data processed:', data);
+                callback(data);
+            }, 1000);
+        }
+
+        // Chaining the functions using nested callbacks
+        fetchData((fetchedData) => {
+            processData(fetchedData, (processedData) => {
+                console.log('Final processed data:', processedData);
+            });
+        });
+    </script>
+</body>
+</html>

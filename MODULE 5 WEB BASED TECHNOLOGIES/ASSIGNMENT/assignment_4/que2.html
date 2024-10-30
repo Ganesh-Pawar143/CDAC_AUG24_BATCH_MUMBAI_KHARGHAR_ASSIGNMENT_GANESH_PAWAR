@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assignment 4 - Question 2</title>
+</head>
+<body>
+    <script>
+        function forEachElement(array, callback) {
+            for (let i = 0; i < array.length; i++) {
+                callback(array[i], i);
+            }
+        }
+
+        const numbers = [1, 2, 3, 4, 5];
+
+        forEachElement(numbers, function(element, index) {
+            console.log(`Index ${index}: ${element * 2}`);
+        });
+    </script>
+</body>
+</html>

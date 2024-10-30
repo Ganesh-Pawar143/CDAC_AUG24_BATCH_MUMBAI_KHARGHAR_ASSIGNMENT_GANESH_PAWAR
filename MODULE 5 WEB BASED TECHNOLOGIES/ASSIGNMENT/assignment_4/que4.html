@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fetch Data with Error Handling</title>
+</head>
+<body>
+    <h1>Fetch Data Example</h1>
+    <div id="data"></div>
+    <script>
+        function fetchData(url, callback) {
+            fetch(url)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok ' + response.statusText);
+                    }
+                    return response.json();
+                })
+                .then(data => callback(null, data))
+                .catch(error => {
+                    console.error('There has been a problem with your fetch operation:', error);
+                    callback('Error fetching data: ' + error.message, null);
+                });
+        }
+
+        // Example usage
+        fetchData('https://api.example.com/data', (error, data) => {
+            if (error) {
+                document.getElementById('data').textContent = error;
+            } else {
+                document.getElementById('data').textContent = JSON.stringify(data, null, 2);
+            }
+        });
+    </script>
+</body>
+</html>
