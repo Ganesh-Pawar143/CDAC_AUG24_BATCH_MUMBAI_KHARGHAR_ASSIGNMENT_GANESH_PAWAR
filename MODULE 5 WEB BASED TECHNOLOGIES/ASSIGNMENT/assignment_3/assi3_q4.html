@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            font-family: 'Segoe UI Light';
+        }
+
+        body {
+            margin: 0;
+            background-color: rgba(173, 249, 249, 0.8);
+            background-size: cover;
+            height: 100vh;
+        }
+
+        nav {
+            width: 100%;
+            height: 100px;
+            box-shadow: 0px 10px 20px #eeeeee;
+        }
+
+        #brand-name {
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+            position: absolute;
+            top: 40px;
+            left: 100px;
+            font-size: 24px;
+        }
+
+        .about-container {
+            align-items: center;
+            background-color: #ffffff73;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 80%;
+            opacity: 1;
+            box-shadow: 4px 4px 4px #4c59afb4;
+            margin: 50px auto;
+        }
+
+        .about-container h2 {
+            margin-bottom: 20px;
+            text-align: center;
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+        }
+
+        .about-container p {
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+            text-align: justify;
+            padding: 15px;
+            font-size: 18px;
+        }     
+
+        .highlight {
+            background-color: rgb(255, 0, 0);
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <span id="ASSIGNMENT">Assignment 3</span>
+    </nav>
+
+  
+    <div class="about-container">
+        <h2>Para 1</h2>
+        <a href="#" onmouseover="highlightBoldWords()" onmouseout="removeHighlight()">On mouse over here bold words of the following paragraphs will be highlighted</a>
+        <p id="paragraph1">
+            HTML stands for HyperText Markup Language. It is the standard language for creating web pages and web applications. HTML describes the structure of a web page semantically and originally included cues for the appearance of the document.
+
+            HTML elements are the building blocks of HTML pages. With HTML constructs, images and other objects, such as interactive forms, may be embedded into the rendered page. HTML provides a means to create structured documents by denoting structural semantics for text such as headings, paragraphs, lists, links, quotes, and other items. HTML elements are delineated by tags, written using angle brackets.
+
+            For example, <b>bold</b> text can be created using the <b> tag, and <i>italic</i> text can be created using the <i> tag. HTML can also be used to include scripts written in languages such as JavaScript, which can affect the behavior and content of web pages.
+        </p>
+    </div>
+
+    <div class="about-container">
+        <h2>para2</h2>
+        <a href="#" onmouseover="highlightBoldWords1()" onmouseout="removeHighlight1()">On mouse over here bold words of the following paragraphs will be highlighted</a>
+        
+        <p id="paragraph2">
+        CSS stands for Cascading Style Sheets. It is a style sheet language used for describing the presentation of a document written in HTML or XML. CSS describes how elements should be rendered on screen, on paper, in speech, or on other media.
+
+        CSS is designed to enable the separation of presentation and content, including layout, colors, and fonts. This separation can improve content accessibility, provide more flexibility and control in the specification of presentation characteristics, enable multiple web pages to share formatting by specifying the relevant CSS in a separate .css file, and reduce complexity and repetition in the structural content.
+
+        For example, <b>bold</b> text can be styled using the <b>font-weight</b> property, and <i>italic</i> text can be styled using the <b>font-style</b> property. CSS can also be used to create responsive web designs that adapt to different screen sizes and devices.
+        </p>
+    </div>
+
+    
+
+    <script>
+       
+        function highlightBoldWords() {
+            var boldWords1 = document.querySelectorAll('#paragraph1 b');
+            boldWords1.forEach(word => {
+                word.classList.add('highlight');
+            });
+           
+        }
+
+        function removeHighlight() {
+            var boldWords1 = document.querySelectorAll('#paragraph1 b');
+            boldWords1.forEach(word => {
+                word.classList.remove('highlight');
+            });
+          
+        }
+
+        function highlightBoldWords1() {
+           
+            var boldWords2 = document.querySelectorAll('#paragraph2 b');
+            boldWords2.forEach(word => {
+                word.classList.add('highlight');
+            });
+        }
+
+        function removeHighlight1() {
+     
+            var boldWords2 = document.querySelectorAll('#paragraph2 b');
+            boldWords2.forEach(word => {
+                word.classList.remove('highlight');
+            });
+        }
+    </script>
+</body>
+
+</html>
+
+
+
+
+

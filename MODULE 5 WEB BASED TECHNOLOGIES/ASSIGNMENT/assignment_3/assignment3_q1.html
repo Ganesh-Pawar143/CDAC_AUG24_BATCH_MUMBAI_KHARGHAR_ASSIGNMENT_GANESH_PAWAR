@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Document</title>
+   <style>
+      * {
+         font-family: 'Segoe UI Light';
+      }
+
+      body {
+         margin: 0;
+         background-color: rgba(173, 249, 249, 0.8);
+         background-size: cover;
+         height: 100vh;
+      }
+
+      nav {
+         width: 100%;
+         height: 100px;
+         box-shadow: 0px 10px 20px #eeeeee;
+      }
+
+
+      #brand-name {
+         font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+         position: absolute;
+         top: 40px;
+         left: 100px;
+         font-size: 24px;
+      }
+
+      .styled{
+            color: blue;
+            font-size: 20px;
+            font-weight: bold;
+            font-family: "Brush Script MT",cursive;
+
+      }
+
+    
+     
+
+      .about-container {
+         align-items: center;
+         background-color: #ffffff73;
+         padding: 20px;
+         border-radius: 8px;
+         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+         width: 80%;
+         opacity: 1;
+         box-shadow: 4px 4px 4px #4c59afb4;
+         margin: 50px auto;
+      }
+
+      .about-container h2 {
+         margin-bottom: 20px;
+         text-align: center;
+         font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+      }
+
+      .about-container p {
+         text-align: justify;
+         padding: 15px;
+         font-size: 18px;
+      }
+
+   button{
+        
+        font-weight: bold;
+        background-color: rgb(246, 248, 247);
+        font-size: large;
+        padding: 20 px;
+        border-radius: 10px;
+        margin-left: 550px;
+
+      }
+ 
+   </style>
+</head>
+
+<body>
+   <nav>      
+      <span id="ASSIGNMENT">Assignment 3</span>
+      </div>
+   </nav>
+   <div class="about-container">
+    <h2>Modify Paragraph style</h2>
+        <p id="paragraph">
+            It is rightly said that being disciplined is essential in life. When a person leads a disciplined life, they set an easy path to success. They will develop an approach to happiness and a beautiful future ahead. Being disciplined is the practice of having a scheduled daily routine which helps an individual to be punctual and hard-working. An individual is taught what being disciplined means from the time they are young. Even though discipline takes a lot of effort, the advantages of a disciplined life make it a worthwhile endeavor.
+        </p>
+        <button onclick="toggleStyle()">Change</button>
+    </div>
+
+<script>
+
+    function toggleStyle() {
+            var paragraph = document.getElementById('paragraph');
+            paragraph.classList.toggle('styled');
+        }
+</script>
+
+</html>
+
+
